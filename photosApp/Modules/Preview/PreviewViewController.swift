@@ -8,22 +8,40 @@
 import UIKit
 
 class PreviewViewController: UIViewController {
+    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet var primaryView: UIView!
+    @IBOutlet weak var secondaryView: UIView!
+    @IBOutlet weak var thirdView: UIView!
+    
+    var selectedImage: UIImage!
+    var selectedSortingOption: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        setup()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setup() {
+        previewImageView.contentMode = .scaleAspectFill
+        previewImageView.image = selectedImage
+        
+        scrollView.minimumZoomScale = 1.0
+        scrollView.maximumZoomScale = 5.0
+        
+        primaryView.backgroundColor = .black
+        secondaryView.backgroundColor = .black
+        thirdView.backgroundColor = .black
+        
     }
-    */
+}
 
+// MARK: -UIScrollViewDelegate
+extension PreviewViewController: UIScrollViewDelegate{
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.previewImageView
+    }
 }
