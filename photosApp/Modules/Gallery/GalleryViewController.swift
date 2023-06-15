@@ -16,18 +16,23 @@ class GalleryViewController: UIViewController  {
     private let inset: CGFloat = 0
     private let spacing: CGFloat = 0
     
-    var viewModel = GalleryViewModel()
+    var galleryViewModel = GalleryViewModel()
     var groupedDataImage: [[PhotoGallery]]?
     var images: [UIImage] = []
     
     var selectedSortingOption: Int = 0
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         setup()
+        
+        // select the "All Photos"
+        segmentedControl.selectedSegmentIndex = 3
+        
+        // action method to trigger the grouping
+        segmentedControlButtonTapped(segmentedControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +60,8 @@ class GalleryViewController: UIViewController  {
     }
     
     //MARK: -ACTION
+    
+    // delete button
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state == .began {
             let point = gestureRecognizer.location(in: collectionView)
@@ -74,16 +81,17 @@ class GalleryViewController: UIViewController  {
     }
     
     func deleteImage(at indexPath: IndexPath) {
-        guard let data = viewModel.dataImage?[indexPath.item] else {
+        guard let data = galleryViewModel.dataImage?[indexPath.item] else {
             return
         }
         CoreDataStorage.shared.context.delete(data)
         try? CoreDataStorage.shared.context.save()
         
-        viewModel.dataImage?.remove(at: indexPath.item)
+        galleryViewModel.dataImage?.remove(at: indexPath.item)
         collectionView.deleteItems(at: [indexPath])
     }
     
+    // add button
     @IBAction func addButtonTapped(_ sender: Any) {
         var config = PHPickerConfiguration(photoLibrary: .shared())
         config.filter = .images
@@ -93,6 +101,7 @@ class GalleryViewController: UIViewController  {
         present(picker, animated: true)
     }
     
+    // sort button
     @IBAction func sortButtonTapped(_ sender: Any) {
         let alert = UIAlertController(title: "Sort by", message: "Please Select an Option", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Latest Added", style: .default, handler: { (UIAlertAction) in
@@ -110,7 +119,7 @@ class GalleryViewController: UIViewController  {
     }
     
     func sortImagesByLatest() {
-        guard var images = viewModel.dataImage else {
+        guard var images = galleryViewModel.dataImage else {
             return
         }
         images.sort { (photo1, photo2) -> Bool in
@@ -119,12 +128,12 @@ class GalleryViewController: UIViewController  {
             }
             return false
         }
-        viewModel.dataImage = images
+        galleryViewModel.dataImage = images
         collectionView.reloadData()
     }
     
     func sortImagesByOldest() {
-        guard var images = viewModel.dataImage else {
+        guard var images = galleryViewModel.dataImage else {
             return
         }
         images.sort { (photo1, photo2) -> Bool in
@@ -133,17 +142,18 @@ class GalleryViewController: UIViewController  {
             }
             return false
         }
-        viewModel.dataImage = images
+        galleryViewModel.dataImage = images
         collectionView.reloadData()
     }
     
+    // segmented control button
     @IBAction func segmentedControlButtonTapped(_ sender: UISegmentedControl) {
-        viewModel.currentGroupingOption = GalleryViewModel.GroupingOption(rawValue: sender.selectedSegmentIndex) ?? .allPhotos
+        galleryViewModel.currentGroupingOption = GalleryViewModel.GroupingOption(rawValue: sender.selectedSegmentIndex) ?? .allPhotos
                 groupPhotosByDate()
     }
     
     func groupPhotosByDate() {
-            viewModel.groupPhotosByDate()
+            galleryViewModel.groupPhotosByDate()
             collectionView.reloadData()
         }
 }
@@ -173,10 +183,11 @@ extension GalleryViewController: PHPickerViewControllerDelegate {
         }
     }
 }
+
 //MARK: -UICollectionViewDataSource
 extension GalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let count = viewModel.dataImage?.count {
+        if let count = galleryViewModel.dataImage?.count {
             if count == 0 {
                 return 1
             } else {
@@ -189,8 +200,8 @@ extension GalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GalleryViewCell.cellIdentifier, for: indexPath) as! GalleryViewCell
         
-        if let count = viewModel.dataImage?.count, count != 0 {
-            let data = viewModel.dataImage?[indexPath.item]
+        if let count = galleryViewModel.dataImage?.count, count != 0 {
+            let data = galleryViewModel.dataImage?[indexPath.item]
             print(indexPath.item)
             
             if let image = data?.savedImage{
@@ -219,8 +230,8 @@ extension GalleryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let viewController = storyboard?.instantiateViewController(withIdentifier: "previewId") as! PreviewViewController
         
-        if let count = viewModel.dataImage?.count, count != 0 {
-            let data = viewModel.dataImage?[indexPath.item]
+        if let count = galleryViewModel.dataImage?.count, count != 0 {
+            let data = galleryViewModel.dataImage?[indexPath.item]
             if let image = data?.savedImage {
                 viewController.selectedImage = UIImage(data: image)
             } else {
@@ -234,7 +245,7 @@ extension GalleryViewController: UICollectionViewDelegate {
     
     // fetch data
     func updateFetchData() {
-        viewModel.dataImage = CoreDataStorage.shared.fetchImage()?.sorted(by: { (photo1, photo2) -> Bool in
+        galleryViewModel.dataImage = CoreDataStorage.shared.fetchImage()?.sorted(by: { (photo1, photo2) -> Bool in
             if let date1 = photo1.addedAt, let date2 = photo2.addedAt {
                 if selectedSortingOption == 0 {
                     return date1 > date2 // Sort by latest added

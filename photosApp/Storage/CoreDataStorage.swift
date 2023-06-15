@@ -15,11 +15,13 @@ class CoreDataStorage {
         printCoreDataDBPath()
     }
     
+    // context persistent container
     lazy var context: NSManagedObjectContext = {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }()
     
+    // print for core data path
     private func printCoreDataDBPath() {
         let path = FileManager
             .default
@@ -32,6 +34,7 @@ class CoreDataStorage {
         print("Core Data DB Path :: \(path ?? "Not found")")
     }
     
+    // fetch image
     func fetchImage() -> ([PhotoGallery]?) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "PhotoGallery")
         do {
@@ -43,6 +46,7 @@ class CoreDataStorage {
         return nil
     }
     
+    // add Image
     func addImage(image: UIImage?, date: Date) {
         guard let entity = NSEntityDescription.entity(forEntityName: "PhotoGallery", in: context) else {
             fatalError("Error while fetching entity")
@@ -63,16 +67,13 @@ class CoreDataStorage {
         photoGallery.addedAt = date
     }
     
-    
+    // delete image
     func deleteImage() {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "PhotoGallery")
         do {
             guard let result = try context.fetch(fetchRequest) as? [PhotoGallery] else {
                 fatalError("error in retrieve data")
             }
-            
-//            let result = try context.fetch(fetchRequest) as? [PhotoGallery]
-//                        result?.forEach { context.delete($0) }
             
             for item in result {
                 context.delete(item)
@@ -83,6 +84,7 @@ class CoreDataStorage {
         }
     }
     
+    // update image
     func updateImage(image: UIImage?, date: Date) {
         let fetchRequset = NSFetchRequest<NSFetchRequestResult>(entityName: "PhotoGallery")
         do {

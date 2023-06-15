@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // appearance of the project
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .systemTeal
         UINavigationBar.appearance().standardAppearance = appearance
