@@ -230,10 +230,14 @@ extension GalleryViewController: UICollectionViewDataSource {
         
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! GalleryHeaderView
         
-        let date = sectionDate[indexPath.section]
-        let headerTitle = date.createDateForHeader()
-        headerView.titleLabel.text = headerTitle
-
+        if indexPath.section < sectionDate.count {
+            let date = sectionDate[indexPath.section]
+            let headerTitle = date.createDateForHeader()
+            headerView.titleLabel.text = headerTitle
+        } else {
+            headerView.titleLabel.text = "invalid section"
+        }
+        
         return headerView
     }
 
