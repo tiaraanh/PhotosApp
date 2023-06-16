@@ -26,8 +26,17 @@ class PreviewViewController: UIViewController {
     }
     
     func setup() {
+        let screenWidth = UIScreen.main.bounds.width
+        let screenHeight = UIScreen.main.bounds.height
+        
         previewImageView.contentMode = .scaleAspectFill
         previewImageView.image = selectedImage
+        
+        scrollView.delegate = self
+        scrollView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+        scrollView.alwaysBounceVertical = false
+        scrollView.alwaysBounceHorizontal = false
+        scrollView.flashScrollIndicators()
         
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 5.0

@@ -17,10 +17,12 @@ class GalleryViewController: UIViewController  {
     private let spacing: CGFloat = 0
     
     var galleryViewModel = GalleryViewModel()
-    var groupedDataImage: [[PhotoGallery]]?
     var images: [UIImage] = []
     
     var selectedSortingOption: Int = 0
+    
+    var groupedDataImage: [[PhotoGallery]]?
+    var sectionDate: [Date] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +30,7 @@ class GalleryViewController: UIViewController  {
         // Do any additional setup after loading the view.
         setup()
         
-        // select the "All Photos"
         segmentedControl.selectedSegmentIndex = 3
-        
-        // action method to trigger the grouping
         segmentedControlButtonTapped(segmentedControl)
     }
     
@@ -54,14 +53,14 @@ class GalleryViewController: UIViewController  {
         collectionViewLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         collectionView.collectionViewLayout = collectionViewLayout
         
+        // to delete the image with long press
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         collectionView.addGestureRecognizer(longPressGesture)
         
     }
-    
     //MARK: -ACTION
     
-    // delete button
+    // delete func
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state == .began {
             let point = gestureRecognizer.location(in: collectionView)
@@ -153,9 +152,10 @@ class GalleryViewController: UIViewController  {
     }
     
     func groupPhotosByDate() {
-            galleryViewModel.groupPhotosByDate()
-            collectionView.reloadData()
-        }
+        galleryViewModel.groupPhotosByDate()
+        sectionDate = galleryViewModel.sectionDates
+        collectionView.reloadData()
+    }
 }
 
 //MARK: -PHPickerViewControllerDelegate
@@ -189,12 +189,12 @@ extension GalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let count = galleryViewModel.dataImage?.count {
             if count == 0 {
-                return 1
+                return 0
             } else {
                 return count
             }
         }
-        return 1
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -215,6 +215,7 @@ extension GalleryViewController: UICollectionViewDataSource {
             }
         }
         
+        // collection view layout
         let width = floor((UIScreen.main.bounds.width - (inset * 3) - spacing) / 3)
         cell.widthConstraint.constant = width
         let height = floor((UIScreen.main.bounds.height - (inset * 6) - spacing) / 6)
@@ -224,6 +225,23 @@ extension GalleryViewController: UICollectionViewDataSource {
         return cell
     }
     
+    // collection view header
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! GalleryHeaderView
+        
+        let date = sectionDate[indexPath.section]
+        let headerTitle = date.createDateForHeader()
+        headerView.titleLabel.text = headerTitle
+
+        return headerView
+    }
+
+    // header size
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+
+        return CGSize(width: collectionView.bounds.width, height: 50)
+    }
 }
 //MARK: -UICollectionViewDelegate
 extension GalleryViewController: UICollectionViewDelegate {

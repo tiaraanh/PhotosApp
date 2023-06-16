@@ -9,6 +9,7 @@ import Foundation
 
 class GalleryViewModel {
     var dataImage: [PhotoGallery]?
+    var sectionDates: [Date] = []
     
     // grouping options for segmented control
     enum GroupingOption: Int {
@@ -38,7 +39,7 @@ class GalleryViewModel {
                 return "\(year)"
             }
             
-            // update dataImage with group images
+            // update dataImage
             dataImage = groupedImages.values.flatMap { $0 }
             
         case .byMonth:
@@ -49,7 +50,6 @@ class GalleryViewModel {
                 return "\(year)-\(month)"
             }
             
-            // update dataImage with group images
             dataImage = groupedImages.values.flatMap { $0 }
             
         case .byDay:
@@ -61,7 +61,6 @@ class GalleryViewModel {
                 return "\(year)-\(month)-\(day)"
             }
             
-            // update dataImage with group images
             dataImage = groupedImages.values.flatMap { $0 }
         }
     }

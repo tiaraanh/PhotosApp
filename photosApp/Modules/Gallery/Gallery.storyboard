@@ -23,13 +23,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="J9o-Ue-SD5">
                                     <size key="itemSize" width="136" height="139"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="galleryCellId" id="FPG-Mi-pwr" customClass="GalleryViewCell" customModule="photosApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="136" height="139"/>
+                                        <rect key="frame" x="0.0" y="50" width="136" height="139"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rKJ-xM-l5s">
                                             <rect key="frame" x="0.0" y="0.0" width="136" height="139"/>
@@ -58,6 +58,28 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="header" id="glY-58-bOh" customClass="GalleryHeaderView" customModule="photosApp" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9h0-03-UdC">
+                                            <rect key="frame" x="8" y="8" width="365" height="34"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="9h0-03-UdC" secondAttribute="bottom" constant="8" id="4p7-xO-XJE"/>
+                                        <constraint firstAttribute="trailing" secondItem="9h0-03-UdC" secondAttribute="trailing" constant="20" id="Xdh-Qn-Eww"/>
+                                        <constraint firstItem="9h0-03-UdC" firstAttribute="leading" secondItem="glY-58-bOh" secondAttribute="leading" constant="8" id="mKg-cD-U41"/>
+                                        <constraint firstItem="9h0-03-UdC" firstAttribute="top" secondItem="glY-58-bOh" secondAttribute="top" constant="8" id="o7K-sw-10L"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="titleLabel" destination="9h0-03-UdC" id="8Fv-Fw-pV0"/>
+                                    </connections>
+                                </collectionReusableView>
                             </collectionView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="N8r-64-dVJ">
                                 <rect key="frame" x="20" y="758" width="353" height="41"/>
@@ -129,14 +151,15 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="4Lj-4D-s6p" firstAttribute="centerX" secondItem="rX0-lY-Ss1" secondAttribute="centerX" id="DbX-iS-c6G"/>
-                                                    <constraint firstItem="4Lj-4D-s6p" firstAttribute="leading" secondItem="rX0-lY-Ss1" secondAttribute="leading" constant="16" id="LS1-T7-xCa"/>
-                                                    <constraint firstAttribute="trailing" secondItem="4Lj-4D-s6p" secondAttribute="trailing" constant="16" id="LzR-Nd-15F"/>
-                                                    <constraint firstAttribute="bottom" secondItem="4Lj-4D-s6p" secondAttribute="bottom" constant="200" id="ZZk-j1-SHI"/>
-                                                    <constraint firstItem="4Lj-4D-s6p" firstAttribute="top" secondItem="rX0-lY-Ss1" secondAttribute="top" constant="200" id="dfM-fE-zDN"/>
+                                                    <constraint firstItem="4Lj-4D-s6p" firstAttribute="leading" secondItem="rX0-lY-Ss1" secondAttribute="leading" constant="16" id="KIs-p0-HWR"/>
+                                                    <constraint firstAttribute="bottom" secondItem="4Lj-4D-s6p" secondAttribute="bottom" constant="200" id="i4S-WS-ldY"/>
                                                     <constraint firstItem="4Lj-4D-s6p" firstAttribute="centerY" secondItem="rX0-lY-Ss1" secondAttribute="centerY" id="kgH-e0-cce"/>
+                                                    <constraint firstAttribute="trailing" secondItem="4Lj-4D-s6p" secondAttribute="trailing" constant="16" id="oLJ-Re-vmq"/>
+                                                    <constraint firstItem="4Lj-4D-s6p" firstAttribute="top" secondItem="rX0-lY-Ss1" secondAttribute="top" constant="200" id="pzf-kO-2aA"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                         <constraints>
                                             <constraint firstItem="rX0-lY-Ss1" firstAttribute="top" secondItem="aCj-I2-LLN" secondAttribute="top" constant="20" id="2dZ-q2-W7x"/>
                                             <constraint firstAttribute="trailing" secondItem="rX0-lY-Ss1" secondAttribute="trailing" id="3Rq-ye-9tL"/>
@@ -202,6 +225,9 @@
     </scenes>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

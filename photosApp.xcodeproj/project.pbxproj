@@ -17,6 +17,8 @@
 		942D502F2A389FC000086A12 /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942D502E2A389FC000086A12 /* GalleryViewModel.swift */; };
 		942D50352A38CF9000086A12 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942D50342A38CF9000086A12 /* PreviewViewController.swift */; };
 		942D50382A38DF8400086A12 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942D50372A38DF8400086A12 /* CoreDataStorage.swift */; };
+		9452A71E2A3BECD400462208 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452A71D2A3BECD400462208 /* DateExtensions.swift */; };
+		9452A7222A3BFF9300462208 /* GalleryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452A7212A3BFF9300462208 /* GalleryHeaderView.swift */; };
 		947D2A652A396A3F003C85C3 /* PhotosData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 947D2A632A396A3F003C85C3 /* PhotosData.xcdatamodeld */; };
 		947D2A682A396AA7003C85C3 /* PhotoGallery+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D2A662A396AA7003C85C3 /* PhotoGallery+CoreDataClass.swift */; };
 		947D2A692A396AA7003C85C3 /* PhotoGallery+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D2A672A396AA7003C85C3 /* PhotoGallery+CoreDataProperties.swift */; };
@@ -35,6 +37,8 @@
 		942D502E2A389FC000086A12 /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
 		942D50342A38CF9000086A12 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		942D50372A38DF8400086A12 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		9452A71D2A3BECD400462208 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		9452A7212A3BFF9300462208 /* GalleryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryHeaderView.swift; sourceTree = "<group>"; };
 		947D2A642A396A3F003C85C3 /* PhotosData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotosData.xcdatamodel; sourceTree = "<group>"; };
 		947D2A662A396AA7003C85C3 /* PhotoGallery+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoGallery+CoreDataClass.swift"; sourceTree = "<group>"; };
 		947D2A672A396AA7003C85C3 /* PhotoGallery+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoGallery+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -72,6 +76,7 @@
 			children = (
 				942D50122A38832C00086A12 /* AppDelegate.swift */,
 				942D50142A38832C00086A12 /* SceneDelegate.swift */,
+				9452A71C2A3BECB000462208 /* Extensions */,
 				942D50362A38DF6C00086A12 /* Storage */,
 				942D50262A38836B00086A12 /* Modules */,
 				942D501B2A38832E00086A12 /* Assets.xcassets */,
@@ -97,6 +102,7 @@
 				942D50292A3883B000086A12 /* GalleryViewController.swift */,
 				942D502E2A389FC000086A12 /* GalleryViewModel.swift */,
 				942D502B2A38845600086A12 /* GalleryViewCell.swift */,
+				9452A7212A3BFF9300462208 /* GalleryHeaderView.swift */,
 			);
 			path = Gallery;
 			sourceTree = "<group>";
@@ -118,6 +124,14 @@
 				942D50372A38DF8400086A12 /* CoreDataStorage.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		9452A71C2A3BECB000462208 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9452A71D2A3BECD400462208 /* DateExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9452A71E2A3BECD400462208 /* DateExtensions.swift in Sources */,
 				942D502A2A3883B000086A12 /* GalleryViewController.swift in Sources */,
 				942D502F2A389FC000086A12 /* GalleryViewModel.swift in Sources */,
 				942D50132A38832C00086A12 /* AppDelegate.swift in Sources */,
@@ -201,6 +216,7 @@
 				942D50382A38DF8400086A12 /* CoreDataStorage.swift in Sources */,
 				947D2A652A396A3F003C85C3 /* PhotosData.xcdatamodeld in Sources */,
 				942D50352A38CF9000086A12 /* PreviewViewController.swift in Sources */,
+				9452A7222A3BFF9300462208 /* GalleryHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

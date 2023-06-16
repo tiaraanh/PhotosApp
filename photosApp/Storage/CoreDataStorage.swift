@@ -41,7 +41,7 @@ class CoreDataStorage {
             let retrieveData = try context.fetch(fetchRequest) as? [PhotoGallery]
             return retrieveData
         } catch {
-            print("Error while fetching data: \(error)")
+            print("error while fetching data: \(error)")
         }
         return nil
     }
@@ -49,7 +49,7 @@ class CoreDataStorage {
     // add Image
     func addImage(image: UIImage?, date: Date) {
         guard let entity = NSEntityDescription.entity(forEntityName: "PhotoGallery", in: context) else {
-            fatalError("Error while fetching entity")
+            fatalError("error while fetching entity")
         }
         
         // convert UIIMAGE to Data
