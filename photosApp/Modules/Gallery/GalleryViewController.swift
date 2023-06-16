@@ -207,7 +207,7 @@ extension GalleryViewController: UICollectionViewDataSource {
             if let image = data?.savedImage{
                 cell.thumbImageView.image = UIImage(data: image)
             }else{
-                cell.thumbImageView.image = UIImage(named: "defaultImage")
+                cell.thumbImageView.image = UIImage(named: "starbuck")
             }
             
             if let name = data?.savedImage {
