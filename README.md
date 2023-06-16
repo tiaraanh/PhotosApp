@@ -16,11 +16,7 @@ This is an app build for fulfill assignment from PT Mirai International Indonesi
 
 ## Screenshots
 
-![App Screenshot](https://res.cloudinary.com/daqnfi8q7/image/upload/v1686893392/Simulator_Screenshot_-_iPhone_14_Pro_-_2023-06-16_at_12.25.38_rnrjie.png)
-![App Screenshot](https://res.cloudinary.com/daqnfi8q7/image/upload/v1686893397/Simulator_Screenshot_-_iPhone_14_Pro_-_2023-06-16_at_12.25.48_yctjby.png)
-![App Screenshot](https://res.cloudinary.com/daqnfi8q7/image/upload/v1686893394/Simulator_Screenshot_-_iPhone_14_Pro_-_2023-06-16_at_12.26.05_r8leqm.png)
-![App Screenshot](https://res.cloudinary.com/daqnfi8q7/image/upload/v1686893399/Simulator_Screenshot_-_iPhone_14_Pro_-_2023-06-16_at_12.25.56_qevtym.png)
-
+![App Screenshot](https://res.cloudinary.com/daqnfi8q7/image/upload/v1686893724/Screenshot_2023-06-16_at_12.34.57_pnkrk6.png)
 
 
 ## Installation
